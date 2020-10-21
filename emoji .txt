@@ -1,0 +1,88 @@
+#include<windows.h>
+#include <GL/glut.h>
+#include <math.h>
+void init(void)
+{
+	glClearColor(0.0, 0.0, 0.0, 0.1);	// Set display window colour to white
+	glMatrixMode(GL_PROJECTION);		// Set projection parameters
+	gluOrtho2D(0.0, 400.0, 0.0, 400.0);
+}
+void display()
+{
+    float theta;
+    int i;
+	glClear(GL_COLOR_BUFFER_BIT);	// Clear display window
+    //Set colour to red
+    glColor3ub (63, 210, 226 );     //Display
+    glBegin(GL_POLYGON);
+    glVertex2d (0, 0);
+    glVertex2d (400, 0);
+    glVertex2d (400, 400);
+    glVertex2d (0, 400);
+    glEnd();
+
+
+	glColor3ub(245, 176, 65);
+	glBegin(GL_POLYGON);
+	for(i=0;i<360;i++)
+	{
+	  theta=i*3.142/180;
+	  glVertex2f(200+150*cos(theta),200+140*sin(theta));         //face
+	}
+	glEnd();
+	glColor3ub(255, 255, 255);
+	glBegin(GL_POLYGON);
+	for(i=0;i<360;i++)
+	{
+	  theta=i*3.142/180;
+	  glVertex2f(150+35*cos(theta),250+45*sin(theta));         //left eye
+	}
+	glEnd();
+	glColor3ub(255, 255, 255);
+	glBegin(GL_POLYGON);
+	for(i=0;i<360;i++)
+	{
+	  theta=i*3.142/180;
+	  glVertex2f(250+35*cos(theta),250+45*sin(theta));         //right eye
+	}
+	glEnd();
+	glColor3ub(83, 39, 56);
+	glBegin(GL_POLYGON);
+	for(i=0;i<360;i++)
+	{
+	  theta=i*3.142/180;
+	  glVertex2f(160+10*cos(theta),225+15*sin(theta));         //left eye iris
+	}
+	glEnd();
+	glColor3ub(83, 39, 56);
+	glBegin(GL_POLYGON);
+	for(i=0;i<360;i++)
+	{
+	  theta=i*3.142/180;
+	  glVertex2f(260+10*cos(theta),225+15*sin(theta));         //right eye iris
+	}
+	glEnd();
+	glColor3ub(151, 53, 90);
+	glBegin(GL_POLYGON);
+	for(i=0;i<360;i++)
+	{
+	  theta=i*3.142/180;
+	  glVertex2f(200+35*cos(theta),120+35*sin(theta));         //mouth
+	}
+	glEnd();
+
+
+glFlush();
+}
+int main(int argc, char* argv[])
+{
+	glutInit(&argc, argv);						// Initalise GLUT
+	glutInitDisplayMode(GLUT_SINGLE|GLUT_RGB);	// Set display mode
+	glutInitWindowPosition(100, 100);				// Set window position
+	glutInitWindowSize(400, 400);					// Set window size
+	glutCreateWindow("Emoji");	// Create display window
+	init();							// Execute initialisation procedure
+	glutDisplayFunc(display);		// Send graphics to display window
+	glutMainLoop();					// Display everything and wait
+	return 0;
+}
